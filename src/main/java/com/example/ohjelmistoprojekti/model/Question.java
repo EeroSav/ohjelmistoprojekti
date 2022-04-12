@@ -9,18 +9,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Kysymys {
+public class Question {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String title;
 
-    public Kysymys(){
+    public Question(){
         super();
         this.title="";
     }
 
-    public Kysymys(String title) {
+    public Question(String title) {
         this.title = title;
     }
 
