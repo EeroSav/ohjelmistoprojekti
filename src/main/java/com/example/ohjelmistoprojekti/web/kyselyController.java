@@ -11,6 +11,7 @@ public class kyselyController {
     @RequestMapping(value = "/addQuestion")
     public String addQuestion(Model model) {
         model.addAttribute("question", new Kysymys());
+
         return "addQuestion";
     }
 }
