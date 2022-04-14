@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1>Kysymykset</h1>
+<h1>Kysymykset</h1>
+
+<table>
     <tr>
-        kysymys1
+        <th>Question</th>
     </tr>
+    <tr th:each="question : ${questions}">
+        <td th:text="${question.title}"></td>
+</table>
+
 </body>
 </html>
