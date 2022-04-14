@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.ohjelmistoprojekti.model.*;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class QuestionController {
@@ -32,5 +35,11 @@ public class QuestionController {
     public String saveQuestion(Question question) {
         qRepository.save(question);
         return "redirect:/questions";
+    }
+
+        //REST haku kaikille kysymyksille
+    @RequestMapping(value="/allQuestions")
+    public @ResponseBody List<Question> questionListRest() {
+        return (List<Question>) qRepository.findAll();
     }
 }
