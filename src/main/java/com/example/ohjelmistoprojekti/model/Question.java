@@ -1,12 +1,9 @@
 package com.example.ohjelmistoprojekti.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Question {
@@ -15,12 +12,18 @@ public class Question {
     private long id;
     private String title;
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+    private List<Answer> answersList;
+
     public Question(){
         super();
         this.title="";
     }
 
+
     public Question(String title) {
+        super();
         this.title = title;
     }
 
@@ -30,6 +33,22 @@ public class Question {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<Answer> getAnswersList() {
+        return answersList;
+    }
+
+    public void setAnswersList(List<Answer> answersList) {
+        this.answersList = answersList;
     }
 
     @Override

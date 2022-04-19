@@ -3,19 +3,24 @@
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Kysymykset </title>
 </head>
 <body>
 <h1>Kysymykset</h1>
+    <div>
+        <table class="table table-striped">
+            <tr th:each = "question : ${questions}">
+                <td th:text="${question.title}"></td>
+                <td>
+                    <label for="qAnswer">:</label>
+                    <input type="text" id="qAnswer" th:field="*{answer}">
+                </td>
+            </tr>
+        </table>
+        <input class="btn btn-success" type="submit" value="Save">
+    </div>
 
-<table>
-    <tr>
-        <th>Question</th>
-    </tr>
-    <tr th:each="question : ${questions}">
-        <td th:text="${question.title}"></td>
-</table>
 
 </body>
 </html>

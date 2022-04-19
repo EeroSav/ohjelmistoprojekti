@@ -15,12 +15,14 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    private questionRepository qRepository;
+    private questionRepository qrepository;
 
+    @Autowired AnswerRepository arepository;
 
     @RequestMapping("/questions")
     public String index(Model model) {
-        model.addAttribute("questions", qRepository.findAll());
+        model.addAttribute("questions", qrepository.findAll());
+        model.addAttribute("answer", new Answer());
         return "questions";
     }
 
@@ -33,13 +35,25 @@ public class QuestionController {
 
     @RequestMapping(value = "/savequestion", method = RequestMethod.POST)
     public String saveQuestion(Question question) {
-        qRepository.save(question);
+        qrepository.save(question);
         return "redirect:/questions";
     }
 
         //REST haku kaikille kysymyksille
     @RequestMapping(value="/allQuestions")
     public @ResponseBody List<Question> questionListRest() {
-        return (List<Question>) qRepository.findAll();
+        return (List<Question>) qrepository.findAll();
+    }
+
+        //REST haku kaikille vastauksille
+    @RequestMapping(value="/allAnswers")
+    public @ResponseBody List<Answer> answerListRest(){
+        return (List<Answer>) arepository.findAll();
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(Answer answer){
+        arepository.save(answer);
+        return "redirect:questions";
     }
 }
