@@ -16,25 +16,20 @@ public class Question {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     private List<Answer> answersList;
 
-    @ManyToOne
-    @JoinColumn(name = "categoryid")
-    private Category category;
+
 
     public Question(){
         super();
         this.title="";
     }
 
-    public Question(String title, Category category) {
-        super();
-        this.title = title;
-        this.category = category;
-    }
-
     public Question(String title) {
         super();
         this.title = title;
+
     }
+
+
 
     public String getTitle() {
         return title;
