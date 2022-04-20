@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface AnswerRepository extends CrudRepository<Answer, Long>{
 
-    List<Answer> findByName(String answer);
+    List<Answer> findByAnswer(String answer);
 
 }

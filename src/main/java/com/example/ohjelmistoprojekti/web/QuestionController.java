@@ -14,10 +14,10 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    private QuestionRepository qrepository;
+    private AnswerRepository arepository;
 
     @Autowired
-    private AnswerRepository arepository;
+    private QuestionRepository qrepository;
 
     @RequestMapping("/questions")
     public String index(Model model) {
