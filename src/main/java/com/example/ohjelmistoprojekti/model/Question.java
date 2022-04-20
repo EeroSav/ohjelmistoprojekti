@@ -13,8 +13,9 @@ public class Question {
     private String title;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-    private List<Answer> answersList;
+    @ManyToOne
+    @JoinColumn(name = "answerid")
+    private Answer answer;
 
 
 
@@ -45,14 +46,6 @@ public class Question {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public List<Answer> getAnswersList() {
-        return answersList;
-    }
-
-    public void setAnswersList(List<Answer> answersList) {
-        this.answersList = answersList;
     }
 
     @Override

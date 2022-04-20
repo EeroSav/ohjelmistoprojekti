@@ -11,7 +11,7 @@ body { /* kaikki bodyn css täällä */
 }
 h1{
     text-align: center;
-    background-color:  #4D6A53 ;  
+    background-color:  #4D6A53 ;
 }
 h2{
     text-align: left;
@@ -28,5 +28,5 @@ div {
     border: 1px solid  #3b5240 ;
     background-color:  #4D6A53 ;
     text-align: left;
-    
+
 }

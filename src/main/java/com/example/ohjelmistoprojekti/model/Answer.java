@@ -2,6 +2,7 @@ package com.example.ohjelmistoprojekti.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Answer {
@@ -10,9 +11,8 @@ public class Answer {
     private long answerid;
     private String question, answer;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private Question questiontitle;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "answer")
+    private List<Question> questions;
 
     public Answer() {
         super();
@@ -46,11 +46,4 @@ public class Answer {
         this.answer = answer;
     }
 
-    public Question getQuestiontitle() {
-        return questiontitle;
-    }
-
-    public void setQuestiontitle(Question questiontitle) {
-        this.questiontitle = questiontitle;
-    }
 }
