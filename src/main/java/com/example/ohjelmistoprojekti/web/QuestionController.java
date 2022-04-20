@@ -16,7 +16,8 @@ public class QuestionController {
     @Autowired
     private QuestionRepository qrepository;
 
-    @Autowired AnswerRepository arepository;
+    @Autowired
+    private AnswerRepository arepository;
 
     @RequestMapping("/questions")
     public String index(Model model) {
