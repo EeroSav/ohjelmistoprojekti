@@ -2,7 +2,8 @@ body { /* kaikki bodyn css täällä */
     background-color:  #EBEBEB;
     margin: 0;
     padding: 0;
-    font-family: 'bryga', 'bryga', serif
+    font-family: 'bryga', 'bryga', serif;
+    color: #ffff;
 }
 @font-face { /*Lisätään oma fontti verkosta */
     font-family: bryga;
