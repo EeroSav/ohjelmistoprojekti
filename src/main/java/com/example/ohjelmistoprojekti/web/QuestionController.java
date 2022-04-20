@@ -51,8 +51,8 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Answer answer){
+    public String saveAnswer(Answer answer){
         arepository.save(answer);
-        return "redirect:questions";
+        return "redirect:/questions";
     }
 }

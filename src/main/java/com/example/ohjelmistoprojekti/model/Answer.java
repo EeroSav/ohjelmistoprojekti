@@ -16,15 +16,12 @@ public class Answer {
 
     public Answer() {
         super();
-        this.question = "";
         this.answer = "";
     }
 
-    public Answer(String question, String answer, Question questiontitle) {
+    public Answer(String answer) {
         super();
-        this.question = question;
         this.answer = answer;
-        this.questiontitle = questiontitle;
     }
 
     public Answer(String question, String answer) {
