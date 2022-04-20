@@ -56,12 +56,4 @@ public class Question {
         this.answerList = answerList;
     }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-                "questionid=" + questionid +
-                ", title='" + title + '\'' +
-                ", answerList=" + answerList +
-                '}';
-    }
 }
