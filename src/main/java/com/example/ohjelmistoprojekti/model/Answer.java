@@ -13,7 +13,7 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long answerid;
-    private String answer;
+    private String input;
 
     @ManyToOne
     @JoinColumn(name = "questionid")
@@ -21,18 +21,18 @@ public class Answer {
 
     public Answer(){
         super();
-        this.answer = "";
+        this.input = "";
     }
 
-    public Answer(String answer, Question question){
+    public Answer(String input, Question question){
         super();
-        this.answer = answer;
+        this.input = input;
         this.question = question;
     }
 
     public Answer(String answer){
         super();
-        this.answer = answer;
+        this.input = input;
     }
 
     public long getAnswerid() {
@@ -43,12 +43,12 @@ public class Answer {
         this.answerid = answerid;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getInput() {
+        return input;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setnput(String input) {
+        this.input = input;
     }
 
     public Question getQuestion() {
@@ -63,7 +63,7 @@ public class Answer {
     public String toString() {
         return "Answer{" +
                 "answerid=" + answerid +
-                ", answer='" + answer + '\'' +
+                ", input='" + input + '\'' +
                 ", question=" + question +
                 '}';
     }
