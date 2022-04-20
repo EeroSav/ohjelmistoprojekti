@@ -1,41 +1,46 @@
 package com.example.ohjelmistoprojekti.model;
 
-
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long answerid;
-    private String question, answer;
+    private String answer;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "answer")
-    private List<Question> questions;
+    @ManyToOne
+    @JoinColumn(name = "questionid")
+    private Question question;
 
-    public Answer() {
+    public Answer(){
         super();
         this.answer = "";
     }
 
-    public Answer(String answer) {
+    public Answer(String answer, Question question){
+        super();
+        this.answer = answer;
+        this.question = question;
+    }
+
+    public Answer(String answer){
         super();
         this.answer = answer;
     }
 
-    public Answer(String question, String answer) {
-        super();
-        this.question = question;
-        this.answer = answer;
+    public long getAnswerid() {
+        return answerid;
     }
 
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setAnswerid(long answerid) {
+        this.answerid = answerid;
     }
 
     public String getAnswer() {
@@ -46,4 +51,20 @@ public class Answer {
         this.answer = answer;
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "answerid=" + answerid +
+                ", answer='" + answer + '\'' +
+                ", question=" + question +
+                '}';
+    }
 }

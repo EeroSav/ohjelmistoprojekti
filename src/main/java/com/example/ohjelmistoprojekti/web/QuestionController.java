@@ -14,7 +14,7 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    private questionRepository qrepository;
+    private QuestionRepository qrepository;
 
     @Autowired AnswerRepository arepository;
 
@@ -28,7 +28,6 @@ public class QuestionController {
     @RequestMapping(value = "/addquestion")
     public String addQuestion(Model model) {
         model.addAttribute("question", new Question());
-
         return "addquestion";
     }
 
@@ -53,6 +52,6 @@ public class QuestionController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveAnswer(Answer answer){
         arepository.save(answer);
-        return "redirect:/questions";
+        return "redirect:questions";
     }
 }

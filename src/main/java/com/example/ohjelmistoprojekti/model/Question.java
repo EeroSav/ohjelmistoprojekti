@@ -2,35 +2,43 @@ package com.example.ohjelmistoprojekti.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import java.util.List;
 
 @Entity
 public class Question {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    private long questionid;
     private String title;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "answerid")
-    private Answer answer;
-
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+    private List<Answer> answerList;
 
     public Question(){
         super();
-        this.title="";
+        this.title = "";
     }
 
-    public Question(String title) {
+    public Question(String title){
         super();
         this.title = title;
-
     }
 
+    public long getQuestionid() {
+        return questionid;
+    }
 
+    public void setQuestionid(long questionid) {
+        this.questionid = questionid;
+    }
 
     public String getTitle() {
         return title;
@@ -40,19 +48,20 @@ public class Question {
         this.title = title;
     }
 
-    public long getId() {
-        return id;
+    public List<Answer> getAnswerList() {
+        return answerList;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setAnswerList(List<Answer> answerList) {
+        this.answerList = answerList;
     }
 
     @Override
     public String toString() {
-        return "Kysymys{" +
-                "id=" + id +
+        return "Question{" +
+                "questionid=" + questionid +
                 ", title='" + title + '\'' +
+                ", answerList=" + answerList +
                 '}';
     }
 }
