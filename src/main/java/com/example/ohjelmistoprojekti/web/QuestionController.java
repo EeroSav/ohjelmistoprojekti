@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import com.example.ohjelmistoprojekti.model.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,54 +18,36 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    private final AnswerRepository arepository;
+    private AnswerRepository arepository;
 
     @Autowired
-    private final QuestionRepository qrepository;
-
-    public AnswersController(AnswerRepository arepository){
-        this.arepository = arepository;
-    }
-
-    public QuestionsController(QuestionRepository qrepository){
-        this.qrepository = qrepository;
-    }
-
-    @GetMapping("/allQuestions")
-    public List<Question> getQuestions() {
-        return qrepository.findAll();
-    }
-
-    @GetMapping("/allAnswers")
-    public List<Answer> getAnswers(){
-        return arepository.findAll();
-    }
+    private QuestionRepository qrepository;
 
     @GetMapping("/{questionid}")
         public Question getQuestion(@PathVariable Long questionid){
-            return qrepository.findById(questionid).orElseThrow(RuntimeException::new)
+            return qrepository.findById(questionid).orElseThrow(RuntimeException::new);
         }
 
     @GetMapping("/{answerid}")
         public Answer getAnswer(@PathVariable Long answerid){
-        return arepository.findById(answerid).orElseThrow(RuntimeException::new)
+        return arepository.findById(answerid).orElseThrow(RuntimeException::new);
     }
 
-    @PostMapping
-    public ResponseEntity createQuestion(@ResponseBody Question question) throws URISyntaxException{
+    @PostMapping("/questions")
+    public ResponseEntity createQuestion(@ModelAttribute Question question) throws URISyntaxException{
         Question savedQuestion = qrepository.save(question);
         return ResponseEntity.created(new URI("/questions/" + savedQuestion.getQuestionid())).body(savedQuestion);
     }
 
 
-    @PostMapping
-    public ResponseEntity createAnswer(@ResponseBody Answer answer) throws URISyntaxException{
+    @PostMapping("/questions")
+    public ResponseEntity createAnswer(@ModelAttribute Answer answer) throws URISyntaxException{
         Answer savedAnswer = arepository.save(answer);
         return ResponseEntity.created(new URI("/answers/" + savedAnswer.getAnswerid())).body(savedAnswer);
     }
 
     @PutMapping("/{answerid}")
-    public ResponseBody updateClient(@PathVariable Long answerid, @RequestBody Answer answer)
+    public ResponseEntity updateClient(@PathVariable Long answerid, @RequestBody Answer answer)
     {
         Answer currentAnswer =
                 arepository.findById(answerid).orElseThrow(RuntimeException::new);
@@ -79,7 +63,6 @@ public class QuestionController {
         arepository.deleteById(answerid);
         return ResponseEntity.ok().build();
     }
-
 }
 
 /*    @RequestMapping("/questions")
@@ -120,3 +103,4 @@ public class QuestionController {
         return "redirect:questions";
     }
 }
+*/
