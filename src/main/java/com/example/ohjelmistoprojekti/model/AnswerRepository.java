@@ -7,5 +7,6 @@ import java.util.List;
 public interface AnswerRepository extends CrudRepository<Answer, Long>{
 
     List<Answer> findByInput(String input);
+    List<Answer> findAll();
 
 }

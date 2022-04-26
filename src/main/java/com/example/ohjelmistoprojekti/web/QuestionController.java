@@ -17,53 +17,28 @@ import java.util.List;
 @RestController
 public class QuestionController {
 
-    @Autowired
-    private AnswerRepository arepository;
+    private QuestionRepository questionRepository;
+    private AnswerRepository answerRepository;
 
     @Autowired
-    private QuestionRepository qrepository;
-
-    @GetMapping("/{questionid}")
-        public Question getQuestion(@PathVariable Long questionid){
-            return qrepository.findById(questionid).orElseThrow(RuntimeException::new);
-        }
-
-    @GetMapping("/{answerid}")
-        public Answer getAnswer(@PathVariable Long answerid){
-        return arepository.findById(answerid).orElseThrow(RuntimeException::new);
+    public QuestionController(QuestionRepository questionRepository, AnswerRepository answerRepository) {
+        this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
     }
 
-    @PostMapping("/questions")
-    public ResponseEntity createQuestion(@ModelAttribute Question question) throws URISyntaxException{
-        Question savedQuestion = qrepository.save(question);
-        return ResponseEntity.created(new URI("/questions/" + savedQuestion.getQuestionid())).body(savedQuestion);
+    @GetMapping("/questions")
+    public ResponseEntity<List<Question>> getQuestions() {
+        return ResponseEntity.ok(questionRepository.findAll());
+    }
+    public ResponseEntity<List<Answer>> getAnswers() {
+        return ResponseEntity.ok(answerRepository.findAll());
     }
 
-
-    @PostMapping("/answers")
-    public ResponseEntity createAnswer(@ModelAttribute Answer answer) throws URISyntaxException{
-        Answer savedAnswer = arepository.save(answer);
-        return ResponseEntity.created(new URI("/answers/" + savedAnswer.getAnswerid())).body(savedAnswer);
-    }
-
-    @PutMapping("/{answerid}")
-    public ResponseEntity updateClient(@PathVariable Long answerid, @RequestBody Answer answer)
-    {
-        Answer currentAnswer =
-                arepository.findById(answerid).orElseThrow(RuntimeException::new);
-                currentAnswer.setInput(answer.getInput());
-                currentAnswer = arepository.save(answer);
-
-                return ResponseEntity.ok(currentAnswer);
-    }
-
-    @DeleteMapping("/{answerid}")
-    public ResponseEntity updateAnswer(@PathVariable Long answerid, @RequestBody Answer answer)
-    {
-        arepository.deleteById(answerid);
-        return ResponseEntity.ok().build();
-    }
 }
+
+
+
+
 
 /*    @RequestMapping("/questions")
     public questions(@RequestParam) {
