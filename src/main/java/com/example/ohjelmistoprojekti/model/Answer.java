@@ -47,7 +47,7 @@ public class Answer {
         return input;
     }
 
-    public void setnput(String input) {
+    public void setInput(String input) {
         this.input = input;
     }
 

@@ -15,15 +15,17 @@
         <tr th:each = "question : ${questions}">
             <td th:text="${question.title}"></td>
             <td>
-                <form th:object="${answer}" th:action="@{save}" action="#" method="post">
-                    <label for="id"></label>
-                    <input type="hidden" id="id" th:field="*{answerid}" readonly="readonly" />
-                    <label for="input">Vastaus:</label>
-                    <input type="text" name="input" id="input" th:value="${answer.input}"/>
+                <form action="#" th:action="@{/save}" method="post" th:object="${answer}">
 
-                </form>
+                    <input type="hidden" id="answerid" th:field="*{answerid}" />
+                    <label for="input">Vastaus:</label>
+                    <input type="text" id="input" th:field="*{input}"/>
+
+
             </td>
         </tr>
+        <input type="submit" value="save">
+        </form>
     </table>
 </div>
 

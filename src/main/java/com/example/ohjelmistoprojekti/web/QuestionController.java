@@ -1,28 +1,92 @@
 package com.example.ohjelmistoprojekti.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.example.ohjelmistoprojekti.model.*;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 
-@Controller
+@RestController
 public class QuestionController {
 
     @Autowired
-    private AnswerRepository arepository;
+    private final AnswerRepository arepository;
 
     @Autowired
-    private QuestionRepository qrepository;
+    private final QuestionRepository qrepository;
 
-    @RequestMapping("/questions")
-    public String index(Model model) {
-        model.addAttribute("questions", qrepository.findAll());
+    public AnswersController(AnswerRepository arepository){
+        this.arepository = arepository;
+    }
+
+    public QuestionsController(QuestionRepository qrepository){
+        this.qrepository = qrepository;
+    }
+
+    @GetMapping("/allQuestions")
+    public List<Question> getQuestions() {
+        return qrepository.findAll();
+    }
+
+    @GetMapping("/allAnswers")
+    public List<Answer> getAnswers(){
+        return arepository.findAll();
+    }
+
+    @GetMapping("/{questionid}")
+        public Question getQuestion(@PathVariable Long questionid){
+            return qrepository.findById(questionid).orElseThrow(RuntimeException::new)
+        }
+
+    @GetMapping("/{answerid}")
+        public Answer getAnswer(@PathVariable Long answerid){
+        return arepository.findById(answerid).orElseThrow(RuntimeException::new)
+    }
+
+    @PostMapping
+    public ResponseEntity createQuestion(@ResponseBody Question question) throws URISyntaxException{
+        Question savedQuestion = qrepository.save(question);
+        return ResponseEntity.created(new URI("/questions/" + savedQuestion.getQuestionid())).body(savedQuestion);
+    }
+
+
+    @PostMapping
+    public ResponseEntity createAnswer(@ResponseBody Answer answer) throws URISyntaxException{
+        Answer savedAnswer = arepository.save(answer);
+        return ResponseEntity.created(new URI("/answers/" + savedAnswer.getAnswerid())).body(savedAnswer);
+    }
+
+    @PutMapping("/{answerid}")
+    public ResponseBody updateClient(@PathVariable Long answerid, @RequestBody Answer answer)
+    {
+        Answer currentAnswer =
+                arepository.findById(answerid).orElseThrow(RuntimeException::new);
+                currentAnswer.setInput(answer.getInput());
+                currentAnswer = arepository.save(answer);
+
+                return ResponseEntity.ok(currentAnswer);
+    }
+
+    @DeleteMapping("/{answerid}")
+    public ResponseEntity updateAnswer(@PathVariable Long answerid, @RequestBody Answer answer)
+    {
+        arepository.deleteById(answerid);
+        return ResponseEntity.ok().build();
+    }
+
+}
+
+/*    @RequestMapping("/questions")
+    public questions(@RequestParam) {
+        Answer answer = new Answer();
         model.addAttribute("answer", new Answer());
+        model.addAttribute("questions", qrepository.findAll());
         return "questions";
     }
 
@@ -50,7 +114,7 @@ public class QuestionController {
         return (List<Answer>) arepository.findAll();
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value="/save", method = RequestMethod.POST)
     public String saveAnswer(Answer answer){
         arepository.save(answer);
         return "redirect:questions";
