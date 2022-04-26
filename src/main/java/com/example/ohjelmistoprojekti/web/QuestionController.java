@@ -40,7 +40,7 @@ public class QuestionController {
     }
 
 
-    @PostMapping("/questions")
+    @PostMapping("/answers")
     public ResponseEntity createAnswer(@ModelAttribute Answer answer) throws URISyntaxException{
         Answer savedAnswer = arepository.save(answer);
         return ResponseEntity.created(new URI("/answers/" + savedAnswer.getAnswerid())).body(savedAnswer);
