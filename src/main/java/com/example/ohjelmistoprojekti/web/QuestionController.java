@@ -1,81 +1,84 @@
 package com.example.ohjelmistoprojekti.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import com.example.ohjelmistoprojekti.model.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Arrays;
+
+import com.example.ohjelmistoprojekti.model.*;
+
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class QuestionController {
 
-    private QuestionRepository questionRepository;
-    private AnswerRepository answerRepository;
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
 
-    @Autowired
-    public QuestionController(QuestionRepository questionRepository, AnswerRepository answerRepository) {
+
+    QuestionController(QuestionRepository questionRepository, AnswerRepository answerRepository) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
     }
 
     @GetMapping("/questions")
-    public ResponseEntity<List<Question>> getQuestions() {
-        return ResponseEntity.ok(questionRepository.findAll());
-    }
-    public ResponseEntity<List<Answer>> getAnswers() {
-        return ResponseEntity.ok(answerRepository.findAll());
+    List<Question> allquestions() {
+        return questionRepository.findAll();
     }
 
+    @GetMapping("/answers")
+    List<Answer> allanswers() {
+        return answerRepository.findAll();
+    }
+
+    @PostMapping("/questions")
+    Question newQuestion(@RequestBody Question newQuestion) {
+        return questionRepository.save(newQuestion);
+    }
+
+    @PostMapping("/answers")
+    Answer newAnswer(@RequestBody Answer newAnswer) {
+        return answerRepository.save(newAnswer);
+    }
+
+    @GetMapping("/questions/{id}")
+    Question oneQ(@PathVariable Long id) {
+        return questionRepository.findById(id)
+                .orElseThrow(() -> new QuestionNotFoundException(id));
+    }
+
+    @GetMapping("/answers/{id}")
+    Answer oneA(@PathVariable Long answerid) {
+        return answerRepository.findById(answerid)
+                .orElseThrow(() -> new AnswerNotFoundException(answerid));
+    }
+
+    @PutMapping("/questions/{id}")
+    Question replaceQuestion(@RequestBody Question newQuestion, @PathVariable Long questionid) {
+        return questionRepository.findById(questionid)
+                .map(question -> {
+                    question.setTitle(newQuestion.getTitle());
+                    return questionRepository.save(question);
+        })
+                .orElseGet(() -> {
+                    newQuestion.setQuestionid(questionid);
+                    return questionRepository.save(newQuestion);
+                });
+    }
+
+    @DeleteMapping("/questions/{id}")
+    void deleteQuestion(@PathVariable Long id) {
+        questionRepository.deleteById(id);
+    }
+
+    @DeleteMapping("/answers/{id}")
+    void deleteAnswer(@PathVariable Long answerid) {
+        answerRepository.deleteById(answerid);
+    }
 }
-
-
-
-
-
-/*    @RequestMapping("/questions")
-    public questions(@RequestParam) {
-        Answer answer = new Answer();
-        model.addAttribute("answer", new Answer());
-        model.addAttribute("questions", qrepository.findAll());
-        return "questions";
-    }
-
-    @RequestMapping(value = "/addquestion")
-    public String addQuestion(Model model) {
-        model.addAttribute("question", new Question());
-        return "addquestion";
-    }
-
-    @RequestMapping(value = "/savequestion", method = RequestMethod.POST)
-    public String saveQuestion(Question question) {
-        qrepository.save(question);
-        return "redirect:/questions";
-    }
-
-        //REST haku kaikille kysymyksille
-    @RequestMapping(value="/allQuestions")
-    public @ResponseBody List<Question> questionListRest() {
-        return (List<Question>) qrepository.findAll();
-    }
-
-        //REST haku kaikille vastauksille
-    @RequestMapping(value="/allAnswers")
-    public @ResponseBody List<Answer> answerListRest(){
-        return (List<Answer>) arepository.findAll();
-    }
-
-    @RequestMapping(value="/save", method = RequestMethod.POST)
-    public String saveAnswer(Answer answer){
-        arepository.save(answer);
-        return "redirect:questions";
-    }
-}
-*/

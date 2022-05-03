@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Question {
@@ -56,4 +57,27 @@ public class Question {
         this.answerList = answerList;
     }
 
+    @Override
+    public int hashCode(){
+        return Objects.hash(this.questionid, this.title);
+    }
+
+    @Override
+    public boolean equals (Object o) {
+        if(this == o)
+            return true;
+        if (!(o instanceof Question))
+            return false;
+        Question question = (Question) o;
+        return Objects.equals(this.questionid, question.questionid) &&
+                Objects.equals(this.title, question.title);
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionid=" + questionid +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

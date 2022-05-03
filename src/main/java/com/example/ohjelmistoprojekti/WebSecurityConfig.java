@@ -1,4 +1,4 @@
-package com.example.ohjelmistoprojekti;
+/*package com.example.ohjelmistoprojekti;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.httpBasic()
+                .and()
                 .authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when logged out
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
@@ -63,4 +64,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new InMemoryUserDetailsManager(users);
     }
 
-}
+}*/
