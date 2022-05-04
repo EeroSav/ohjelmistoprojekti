@@ -8,5 +8,6 @@ public interface AnswerRepository extends JpaRepository<Answer, Long>{
 
     List<Answer> findByInput(String input);
     List<Answer> findAll();
+     //List<Answer> findByQuestionid(Long questionid);
 
 }

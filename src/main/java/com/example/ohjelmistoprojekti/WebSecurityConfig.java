@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/questions", true)
+                .defaultSuccessUrl("/list", true)
                 .permitAll()
                 .and()
                 .logout()
@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
         user = User
                 .withUsername("admin")
                 .password(passwordEncoder.encode("admin"))
-                .roles("USER", "ADMIN")
+                .roles("ADMIN", "USER")
                 .build();
 
         users.add(user);
