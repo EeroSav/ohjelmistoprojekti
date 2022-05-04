@@ -5,12 +5,27 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/main.css" th:href="@{css/main.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <title>Kysymykset </title>
 </head>
 <body>
-<h1>Kysely: "Mielestäni parasta on: "</h1>
-<h2>Tällä kyselyllä selvitetään henkilöiden suosimia asioita eri aiheista. Kysely on nimetön.</h2>
-<div>
+
+
+<div class="container-xl bg-success">
+<h1 class="text-center">Kysely: "Mielestäni parasta on: "</h1>
+<h6>Tällä kyselyllä selvitetään henkilöiden suosimia asioita eri aiheista. Kysely on nimetön.</h6>
+</div>
+
+
+<div class="container-xl bg-success mb-3">
+  <h4>Monta pullaa söit</h4>
+  <select class="form-select" aria-label="Default select example">
+    <option selected>Open this select menu</option>
+    <option value="1">Yksi</option>
+    <option value="2">Kaksi</option>
+    <option value="3">Kolme</option>
+  </select>
+    <!-- tässä tää vanha kysymys höskä pitää lisää takas pian
     <table class="table table-striped">
         <tr th:each = "question : ${questions}">
             <td th:text="${question.title}"></td>
@@ -21,14 +36,61 @@
                     <label for="input">Vastaus:</label>
                     <input type="text" id="input" th:field="*{input}"/>
 
-
             </td>
         </tr>
         <input type="submit" value="save">
         </form>
     </table>
+-->
+
+</div>
+<div class="container-xl bg-success mb-3">
+  <h4>Heräsitkö aamulla</h4>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+    <label class="form-check-label" for="flexRadioDefault1">
+      Kyllä
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+    <label class="form-check-label" for="flexRadioDefault2">
+      En
+    </label>
+  </div>
 </div>
 
+<div class="container-xl bg-success mb-3">
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label"> <h4>Miksi opiskelet ohjelmointia?!</h4></label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Vastaa!">
+      </div>
+</div>
 
+<div class="container-xl bg-success mb-3">
+    <h4>Onko Eero komea</h4>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          On
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          Kyllä
+        </label>
+      </div>
+</div>
+
+<div class="container-xl bg-success mb-3">
+    <h4>Kiitos vastauksista, hyvää päivän jatkoa.</h4>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+    
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
