@@ -30,7 +30,7 @@ public class Answer {
         this.question = question;
     }
 
-    public Answer(String answer){
+    public Answer(String input){
         super();
         this.input = input;
     }

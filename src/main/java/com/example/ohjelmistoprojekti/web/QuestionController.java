@@ -54,22 +54,36 @@ public class QuestionController {
     }
 
     @GetMapping("/answers/{id}")
-    Answer oneA(@PathVariable Long answerid) {
-        return answerRepository.findById(answerid)
-                .orElseThrow(() -> new AnswerNotFoundException(answerid));
+    Answer oneA(@PathVariable Long id) {
+        return answerRepository.findById(id)
+                .orElseThrow(() -> new AnswerNotFoundException(id));
     }
 
     @PutMapping("/questions/{id}")
-    Question replaceQuestion(@RequestBody Question newQuestion, @PathVariable Long questionid) {
-        return questionRepository.findById(questionid)
+    Question replaceQuestion(@RequestBody Question newQuestion, @PathVariable Long id) {
+        return questionRepository.findById(id)
                 .map(question -> {
                     question.setTitle(newQuestion.getTitle());
                     return questionRepository.save(question);
         })
                 .orElseGet(() -> {
-                    newQuestion.setQuestionid(questionid);
+                    newQuestion.setQuestionid(id);
                     return questionRepository.save(newQuestion);
                 });
+    }
+
+    @PutMapping("/answers/{id}")
+    Answer replaceAnswer(@RequestBody Answer newAnswer, @PathVariable Long id) {
+        return answerRepository.findById(id)
+                .map(answer -> {
+                    answer.setInput(newAnswer.getInput());
+                    answer.setQuestion(newAnswer.getQuestion());
+                    return answerRepository.save(answer);
+        })
+                .orElseGet(() -> {
+                    newAnswer.setAnswerid(id);
+                    return answerRepository.save(newAnswer);
+        });
     }
 
     @DeleteMapping("/questions/{id}")
@@ -78,7 +92,7 @@ public class QuestionController {
     }
 
     @DeleteMapping("/answers/{id}")
-    void deleteAnswer(@PathVariable Long answerid) {
-        answerRepository.deleteById(answerid);
+    void deleteAnswer(@PathVariable Long id) {
+        answerRepository.deleteById(id);
     }
 }
