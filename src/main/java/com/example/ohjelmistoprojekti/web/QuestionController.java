@@ -14,6 +14,12 @@ public class QuestionController {
     private QuestionRepository questionRepository;
     private AnswerRepository answerRepository;
 
+
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping(value={"/list"})
     public String questions(Model model) {
         model.addAttribute("questions", questionRepository.findAll());
