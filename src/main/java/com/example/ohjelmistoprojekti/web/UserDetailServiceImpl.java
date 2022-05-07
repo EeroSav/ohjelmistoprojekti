@@ -1,15 +1,13 @@
 package com.example.ohjelmistoprojekti.web;
 
 
-import com.example.ohjelmistoprojekti.model.User;
-import com.example.ohjelmistoprojekti.model.UserRepository;
+import com.example.ohjelmistoprojekti.user.User;
+import com.example.ohjelmistoprojekti.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service

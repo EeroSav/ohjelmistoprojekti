@@ -1,6 +1,10 @@
-package com.example.ohjelmistoprojekti.model;
+package com.example.ohjelmistoprojekti.user;
+
+import com.example.ohjelmistoprojekti.answer.Answer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -21,6 +25,12 @@ public class User {
 
     @Column(name = "role", nullable = false)
     private String role;
+
+    /*
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Answer> answerList;
+    */
 
     public User() {
     }

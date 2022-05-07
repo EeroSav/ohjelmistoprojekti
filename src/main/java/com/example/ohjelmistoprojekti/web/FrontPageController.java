@@ -1,7 +1,7 @@
 package com.example.ohjelmistoprojekti.web;
 
-import com.example.ohjelmistoprojekti.model.AnswerRepository;
-import com.example.ohjelmistoprojekti.model.QuestionRepository;
+import com.example.ohjelmistoprojekti.answer.AnswerRepository;
+import com.example.ohjelmistoprojekti.question.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 //Etusivun oma controller
 @Controller
-public class QuestionController {
+public class FrontPageController {
     @Autowired
     private QuestionRepository questionRepository;
     private AnswerRepository answerRepository;

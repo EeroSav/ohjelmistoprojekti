@@ -1,4 +1,5 @@
-package com.example.ohjelmistoprojekti.web;
+package com.example.ohjelmistoprojekti.answer;
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

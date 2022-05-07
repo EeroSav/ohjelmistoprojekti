@@ -1,4 +1,4 @@
-package com.example.ohjelmistoprojekti.model;
+package com.example.ohjelmistoprojekti.user;
 
 import org.springframework.data.repository.CrudRepository;
 

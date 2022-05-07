@@ -1,6 +1,10 @@
 package com.example.ohjelmistoprojekti;
 
-import com.example.ohjelmistoprojekti.model.*;
+import com.example.ohjelmistoprojekti.answer.Answer;
+import com.example.ohjelmistoprojekti.answer.AnswerRepository;
+import com.example.ohjelmistoprojekti.question.Question;
+import com.example.ohjelmistoprojekti.question.QuestionRepository;
+import com.example.ohjelmistoprojekti.user.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -18,7 +22,6 @@ class LoadDatabase {
 
             qrepository.save(new Question("kysymys"));
             qrepository.save(new Question("kysymys2"));
-
 
             arepository.save(new Answer("asd", qrepository.findByTitle("kysymys").get(0)));
             arepository.save(new Answer("asas", qrepository.findByTitle("kysymys2").get(0)));

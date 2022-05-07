@@ -1,8 +1,8 @@
-package com.example.ohjelmistoprojekti.model;
+package com.example.ohjelmistoprojekti.question;
 
+import com.example.ohjelmistoprojekti.answer.Answer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +20,7 @@ public class Question {
     private String title;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+    @OneToMany(mappedBy = "question")
     private List<Answer> answerList;
 
     public Question(){
@@ -71,13 +71,5 @@ public class Question {
         Question question = (Question) o;
         return Objects.equals(this.questionid, question.questionid) &&
                 Objects.equals(this.title, question.title);
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "questionid=" + questionid +
-                ", title='" + title + '\'' +
-                '}';
     }
 }

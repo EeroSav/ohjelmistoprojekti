@@ -1,4 +1,4 @@
-package com.example.ohjelmistoprojekti.web;
+package com.example.ohjelmistoprojekti.answer;
 
 class AnswerNotFoundException extends RuntimeException{
 

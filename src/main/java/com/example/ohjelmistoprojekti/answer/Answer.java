@@ -1,12 +1,9 @@
-package com.example.ohjelmistoprojekti.model;
+package com.example.ohjelmistoprojekti.answer;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.example.ohjelmistoprojekti.question.Question;
+import com.example.ohjelmistoprojekti.user.User;
+
+import javax.persistence.*;
 
 @Entity
 public class Answer {
@@ -15,9 +12,15 @@ public class Answer {
     private long answerid;
     private String input;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "questionid")
     private Question question;
+
+    /*
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userid")
+    private User user;
+    */
 
     public Answer(){
         super();
