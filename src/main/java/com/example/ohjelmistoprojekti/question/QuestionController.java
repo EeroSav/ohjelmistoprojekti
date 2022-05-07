@@ -53,10 +53,10 @@ public class QuestionController {
                 });
     }
 
+    //Poista kysymys
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/questions/{id}")
     void deleteQuestion(@PathVariable Long id) {
         questionRepository.deleteById(id);
     }
-
 }

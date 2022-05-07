@@ -16,11 +16,9 @@ public class Answer {
     @JoinColumn(name = "questionid")
     private Question question;
 
-    /*
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid")
     private User user;
-    */
 
     public Answer(){
         super();
@@ -60,6 +58,14 @@ public class Answer {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

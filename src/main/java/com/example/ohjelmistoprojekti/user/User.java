@@ -12,7 +12,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+    private Long userid;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -26,11 +26,9 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
-    /*
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Answer> answerList;
-    */
 
     public User() {
     }
@@ -43,12 +41,12 @@ public class User {
         this.role = role;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserid() {
+        return userid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserid(Long id) {
+        this.userid = id;
     }
 
     public String getUsername() {
