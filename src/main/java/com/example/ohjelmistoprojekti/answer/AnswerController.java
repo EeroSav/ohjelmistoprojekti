@@ -24,10 +24,7 @@ public class AnswerController {
 
     //Yhdistä kysymys vastaukseen
     @PutMapping("/answers/{answerid}/questions/{questionid}")
-    Answer assignAnswerToQuestion(
-            @PathVariable Long answerid,
-            @PathVariable Long questionid
-    ) {
+    Answer assignAnswerToQuestion(@PathVariable Long answerid, @PathVariable Long questionid) {
         Answer answer = answerRepository.findByAnswerid(answerid);
         Question question = questionRepository.findByQuestionid(questionid);
         answer.setQuestion(question);
@@ -36,10 +33,7 @@ public class AnswerController {
 
     //Yhdistä käyttäjä vastaukseen
     @PutMapping("/answers/{answerid}/users/{userid}")
-    Answer assignUserToAnswer(
-            @PathVariable Long answerid,
-            @PathVariable Long userid
-    ) {
+    Answer assignUserToAnswer(@PathVariable Long answerid, @PathVariable Long userid) {
         Answer answer = answerRepository.findByAnswerid(answerid);
         User user = userRepository.findByUserid(userid);
         answer.setUser(user);
