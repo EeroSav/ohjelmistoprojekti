@@ -23,6 +23,8 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private List<Answer> answerList;
 
+
+
     public Question(){
         super();
         this.title = "";

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 //Etusivun oma controller
 @Controller
-public class FrontPageController {
+public class ThymeleafController {
     @Autowired
     private QuestionRepository questionRepository;
     private AnswerRepository answerRepository;
@@ -24,5 +24,9 @@ public class FrontPageController {
     public String questions(Model model) {
         model.addAttribute("questions", questionRepository.findAll());
         return "questions";
+    }
+    @RequestMapping(value = "/addquestion")
+    public String addquestion() {
+        return "addquestion";
     }
 }
