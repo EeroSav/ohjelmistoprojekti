@@ -4,6 +4,9 @@ package com.example.ohjelmistoprojekti.question;
 import com.example.ohjelmistoprojekti.answer.Answer;
 import com.example.ohjelmistoprojekti.answer.AnswerController;
 import com.example.ohjelmistoprojekti.answer.AnswerRepository;
+import com.example.ohjelmistoprojekti.survey.Survey;
+import com.example.ohjelmistoprojekti.survey.SurveyController;
+import com.example.ohjelmistoprojekti.survey.SurveyRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +16,13 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class QuestionController {
 
+    private final SurveyRepository surveyRepository;
+
     private final QuestionRepository questionRepository;
 
-    QuestionController(QuestionRepository questionRepository){
+    QuestionController(QuestionRepository questionRepository, SurveyRepository surveyRepository){
         this.questionRepository = questionRepository;
+        this.surveyRepository = surveyRepository;
     }
 
     //Hae kaikki kysymykset
@@ -60,4 +66,7 @@ public class QuestionController {
     void deleteQuestion(@PathVariable Long id) {
         questionRepository.deleteById(id);
     }
+
+
+
 }
