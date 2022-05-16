@@ -1,8 +1,5 @@
-package com.example.ohjelmistoprojekti.web;
+package com.example.ohjelmistoprojekti.user;
 
-
-import com.example.ohjelmistoprojekti.user.User;
-import com.example.ohjelmistoprojekti.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;

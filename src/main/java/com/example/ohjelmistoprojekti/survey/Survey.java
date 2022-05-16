@@ -17,15 +17,24 @@ public class Survey {
     private String surveyName;
 
     @ManyToMany
-    private Set<Question> questions = new HashSet<>();
+    @JoinTable(
+            name="QuestionInSurvey",
+            inverseJoinColumns = @JoinColumn(name="surveyId"),
+            joinColumns = @JoinColumn(name="questionid")
+    )
+    Set<Question> surveyquestions = new HashSet<>();
 
-    public Survey() {
-    }
-
-    public Survey(long surveyId, String surveyName, Set<Question> questions) {
+    public Survey(long surveyId, String surveyName) {
         this.surveyId = surveyId;
         this.surveyName = surveyName;
-        this.questions = questions;
+    }
+
+    public Survey() {
+
+    }
+
+    public Set<Question> getSurveyquestions() {
+        return surveyquestions;
     }
 
     public long getSurveyId() {
@@ -42,13 +51,5 @@ public class Survey {
 
     public void setSurveyName(String surveyName) {
         this.surveyName = surveyName;
-    }
-
-    public Set<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
     }
 }

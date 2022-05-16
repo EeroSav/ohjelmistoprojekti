@@ -3,14 +3,12 @@ package com.example.ohjelmistoprojekti.question;
 import com.example.ohjelmistoprojekti.answer.Answer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Question {
@@ -23,6 +21,9 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private List<Answer> answerList;
 
+    @JsonIgnore
+    @ManyToMany
+    private Set<Question> questions = new HashSet<>();
 
 
     public Question(){
